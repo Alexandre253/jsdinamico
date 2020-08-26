@@ -1,0 +1,87 @@
+<html>
+	<head>
+		<title>Loja virt - Totalmente dinâmica</title>
+		<meta charset="utf-8"/>
+		<style>
+			#produtos,
+			#carrinhos{
+			max-width: 900px;
+			margin:0 auto;
+			padding:0 2%;
+			display: flex;
+			}
+			.produto-single{
+			width 33.3%
+			padding:0 20px;
+			}
+			</style>
+	</head>
+	
+	<body>
+		<div id="produtos">
+		</div>
+		<div id="carrinho">
+		<center><h2>Carrinho</h2>
+		</center>
+		</div>
+	<script>
+			const items=[
+			{
+			id: 0,
+			nome: 'Relógio',
+			valor: 40,
+			quantidade: 0
+			},
+		    {
+			id: 1,
+			nome: 'Óculos',
+			valor: 25,
+			quantidade: 0
+			},
+			{
+			id: 2,
+			nome: 'Corrente',
+			valor: 30,
+			quantidade: 0
+			}
+			]
+			
+			function incializarLoja(){
+				var containerProdutos = document.getElementById('produtos');
+				/*items.map((val)=>{
+					console.log(val.nome);
+				})*/
+				for(let i = 0; i < items.length; i++){
+				console.log(items[i]);
+				containerProdutos.innerHTML += '<div class="produto-single"><p>'+items[i].nome+'</p><p>R$'+items[i].valor+'</p><a key="'+items[i].id+'"href="#	">Adicionar ao carrinho!<a/></div><hr>';
+				}
+				
+			}
+			incializarLoja();
+			
+			var links = document.getElementsByTagName('a');
+				for(var i = 0; i < links.length; i++){
+				links[i].addEventListener("click",function(){
+					let key = this.getAttribute('key');
+					console.log(key);
+					items[key].quantidade++;
+					updateCarrinho();
+					return false;
+				})
+			}
+			function updateCarrinho(){
+				console.log(items);
+					var containerCarrinho = document.getElementById('carrinho');
+					containerCarrinho.innerHTML = "";
+					var valorTotal= 0;
+						for(let i = 0; i < items.length; i++){
+							if(items[i].quantidade>0){
+							console.log(items[i]);
+							containerCarrinho.innerHTML += '<p>'+items[i].nome+'| Quantidade: '+items[i].quantidade+'| Valor Unitário: R$'+items[i].valor*items[i].quantidade+'</p><hr>';
+							}
+					}
+				}
+	</script>
+	
+	</body>
+</html>
